@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -49,18 +50,44 @@ class Orange:
    def menu_validation(self):
        sleep(5)
        try:
+           
            admin = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[1]/a/span')
            admin.click()
            sleep(5)
-           main_menu_items_text = []
-           main_menu_items = self.driver.find_elements(By.XPATH, '/html/body/div/div[1]/div[1]/aside/nav/div[2]/ul/li')
-           for item in main_menu_items:
-               print(item.text)
-               main_menu_items_text.append(item.text)
-           main_menu_options = ["Admin", "PIM", "Leave", "Time", "Recruitment", "My Info", "Performance", "Dashboard",
-                                "Directory", "Maintenance", "Buzz"]
-           for option_text in main_menu_options:
-               assert option_text in main_menu_items_text
+           pim = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a')
+           pim.click()
+           sleep(5)
+           leave = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[3]/a')
+           leave.click()
+           sleep(5)
+           time = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[4]/a')
+           time.click()
+           sleep(5)
+           recruitment = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[5]/a')
+           recruitment.click()
+           sleep(5)
+           myinfo = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[6]/a')
+           myinfo.click()
+           sleep(5)
+           performance = self.driver.find_element(By.XPATH,
+                                                  '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[7]/a/span')
+           performance.click()
+           sleep(5)
+           dashboard = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[8]/a')
+           dashboard.click()
+           sleep(5)
+           directory = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[9]/a')
+           directory.click()
+           sleep(5)
+           maintenance = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[10]/a')
+           maintenance.click()
+           sleep(5)
+           cancel = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/form/div[4]/button[1]')
+           cancel.click()
+           sleep(5)
+           buzz = self.driver.find_element(By.XPATH, '//*[@id="app"]/div[1]/div[1]/aside/nav/div[2]/ul/li[12]/a')
+           buzz.click()
+           sleep(5)
        finally:
            self.driver.quit()
 
