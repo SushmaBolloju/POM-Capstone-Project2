@@ -1,0 +1,29 @@
+
+from Data import data
+from Locators import locator
+from time import sleep
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+import pytest
+class Test:
+   @pytest.fixture
+   def boot(self):
+       self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+       yield
+       self.driver.quit()
+   @pytest.mark.html
+   def testTitle(self, boot):
+       self.driver.get(data.WebData().url)
+       assert self.driver.title == data.WebData().loginPageTitle
+       print("SUCCESS: Web Title Verified")
+   #@pytest.mark.html
+   def testLogin(self, boot):
+       self.driver.get(data.WebData().url)
+       self.driver.implicitly_wait(10)
+       locator.WebLocators().enterText(self.driver, locator.WebLocators().usernameLocator, data.WebData().username)
+       locator.WebLocators().enterText(self.driver, locator.WebLocators().forgot_passwordLocator, data.WebData().forgot_password)
+       locator.WebLocators().enterText(self.driver, locator.WebLocators().usernameLocator1, data.WebData().username1)
+       locator.WebLocators().clickButton(self.driver, locator.WebLocators().resetlocator)
+       assert self.driver.current_url == data.WebData().dashboardURL
+       print(f"SUCCESS : Logged in with {data.WebData().username} and the password is {data.WebData().password}")
